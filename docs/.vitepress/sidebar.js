@@ -44,65 +44,96 @@ export function generateSidebar(dir, prefix = '') {
   const items = []
   const files = fs.readdirSync(dir, { withFileTypes: true })
 
+  // 分别处理文件和目录
+  const directories = []
+  const markdownFiles = []
+
   files.forEach(file => {
     if (file.name.startsWith('.') || file.name.startsWith('_')) return
 
-    const fullPath = path.join(dir, file.name)
-    const relativePath = path.join(prefix, file.name)
-
     if (file.isDirectory()) {
-      const subItems = generateSidebar(fullPath, relativePath)
-      if (subItems.length > 0) {
-        // 尝试读取目录的 index.md
-        const indexPath = path.join(fullPath, 'index.md')
-        let dirTitle = formatName(file.name)
-        let dirOrder = extractOrderFromName(file.name)
-        
-        if (fs.existsSync(indexPath)) {
-          const frontmatter = extractFrontmatter(indexPath)
-          if (frontmatter.title) dirTitle = frontmatter.title
-          if (frontmatter.order !== undefined) dirOrder = frontmatter.order
-        }
-        
-        items.push({
-          text: dirTitle,
-          collapsed: false,
-          items: subItems,
-          order: dirOrder
-        })
-      }
+      directories.push(file)
     } else if (file.name.endsWith('.md')) {
-      const name = file.name.replace('.md', '')
-      const frontmatter = extractFrontmatter(fullPath)
-      
-      if (name === 'index') {
-        items.unshift({
-          text: frontmatter.title || '概览',
-          link: prefix ? `/${prefix.replace(/\\/g, '/')}/` : '/',
-          order: frontmatter.order !== undefined ? frontmatter.order : -1000
-        })
-      } else {
-        const title = frontmatter.title || formatName(name)
-        const order = frontmatter.order !== undefined ? frontmatter.order : extractOrderFromName(name)
-        
-        items.push({
-          text: title,
-          link: `/${relativePath.replace(/\\/g, '/').replace('.md', '')}`,
-          order: order
-        })
-      }
+      markdownFiles.push(file)
     }
   })
 
+  // 处理 markdown 文件（同一层级）
+  markdownFiles.forEach(file => {
+    const fullPath = path.join(dir, file.name)
+    const relativePath = path.join(prefix, file.name)
+    const name = file.name.replace('.md', '')
+    const frontmatter = extractFrontmatter(fullPath)
+    
+    if (name === 'index') {
+      // index.md 作为目录首页
+      items.push({
+        text: frontmatter.title || '概览',
+        link: prefix ? `/${prefix.replace(/\\/g, '/')}/` : '/',
+        order: frontmatter.order !== undefined ? frontmatter.order : -1000
+      })
+    } else {
+      const title = frontmatter.title || formatName(name)
+      const order = frontmatter.order !== undefined ? frontmatter.order : extractOrderFromName(name)
+      
+      items.push({
+        text: title,
+        link: `/${relativePath.replace(/\\/g, '/').replace('.md', '')}`,
+        order: order
+      })
+    }
+  })
+
+  // 在当前层级排序文件
   items.sort((a, b) => {
     const orderA = a.order !== undefined ? a.order : 999
     const orderB = b.order !== undefined ? b.order : 999
     return orderA - orderB
   })
 
+  // 移除文件的 order 属性
   items.forEach(item => delete item.order)
 
-  return items
+  // 处理子目录（同一层级）
+  const dirItems = []
+  directories.forEach(file => {
+    const fullPath = path.join(dir, file.name)
+    const relativePath = path.join(prefix, file.name)
+    
+    const subItems = generateSidebar(fullPath, relativePath)
+    if (subItems.length > 0) {
+      // 尝试读取目录的 index.md
+      const indexPath = path.join(fullPath, 'index.md')
+      let dirTitle = formatName(file.name)
+      let dirOrder = extractOrderFromName(file.name)
+      
+      if (fs.existsSync(indexPath)) {
+        const frontmatter = extractFrontmatter(indexPath)
+        if (frontmatter.title) dirTitle = frontmatter.title
+        if (frontmatter.order !== undefined) dirOrder = frontmatter.order
+      }
+      
+      dirItems.push({
+        text: dirTitle,
+        collapsed: false,
+        items: subItems,
+        order: dirOrder
+      })
+    }
+  })
+
+  // 在当前层级排序目录
+  dirItems.sort((a, b) => {
+    const orderA = a.order !== undefined ? a.order : 999
+    const orderB = b.order !== undefined ? b.order : 999
+    return orderA - orderB
+  })
+
+  // 移除目录的 order 属性
+  dirItems.forEach(item => delete item.order)
+
+  // 合并文件和目录：文件在前，目录在后
+  return [...items, ...dirItems]
 }
 
 function extractOrderFromName(name) {

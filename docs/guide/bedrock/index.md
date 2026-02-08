@@ -1,6 +1,6 @@
 ---
 title: Bedrock指南
-order: 3
+order: 1
 ---
 
 # Bedrock开服指南
