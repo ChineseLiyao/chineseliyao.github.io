@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  base: '/ChineseLiyao/',
+  base: '/',
   title: 'AusDoc',
   description: 'AusJava 服务器文档站点',
 
