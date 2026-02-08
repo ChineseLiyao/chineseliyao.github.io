@@ -19,6 +19,12 @@ const myCards = [
     desc: '了解如何开一个基岩版服务器', 
     link: 'bedrock/',
     type: 'page'
+  },
+  { 
+    title: 'Java版开服指南', 
+    desc: '了解如何开一个Java版服务器', 
+    link: 'bedrock/',
+    type: 'page'
   }
 ]
 </script>

@@ -17,13 +17,19 @@ Endstone 是一个基于 Bedrock Dedicated Server (BDS) 的插件加载器，它
 Python 3.10 或更高版本
 
 ### 下载Endstone
-`pip install endstone`
+```bash
+pip install endstone
+```
 这将使用pip包管理器自动下载endstone。
 
 ### 开服
 切换到你的服务器目录。
 运行以下命令:
-`endstone`
+
+```bash
+endstone
+```
+
 首次启动会引导你下载原版服务端，输入Y回车继续。
 
 ### 编辑配置
