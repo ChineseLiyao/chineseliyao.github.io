@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  base: '/',
+  base: '/ChineseLiyao/',
   title: 'AusDoc',
   description: 'AusJava 服务器文档站点',
 
@@ -20,17 +20,10 @@ export default defineConfig({
           { text: '快速开始', link: '/guide/getting-started' }
         ]
       },
-      {
-        text: '进阶',
-        items: [
-          { text: '配置', link: '/guide/configuration' },
-          { text: 'API 参考', link: '/guide/api' }
-        ]
-      }
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/yourusername/ausdoc' }
+      { icon: 'github', link: 'https://github.com/ChineseLiyao/chineseliyao.github.io' }
     ],
 
     footer: {

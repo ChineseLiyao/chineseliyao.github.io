@@ -2,7 +2,7 @@
 
 ## 关于 AusDoc
 
-AusDoc 是 AusJava 服务器的官方文档站点，旨在为用户提供清晰、完整的使用指南和技术文档。
+AusDoc 是 AusJava 服务器提供的文档站点，旨在为服主提供清晰、完整的Minecraft开服指南和技术文档。
 
 ## 技术栈
 
@@ -12,7 +12,7 @@ AusDoc 是 AusJava 服务器的官方文档站点，旨在为用户提供清晰�
 
 ## 贡献
 
-欢迎贡献文档内容！如果你发现任何问题或有改进建议，请：
+欢迎贡献文档内容！我们将不胜感激！如果你发现任何问题或有改进建议，请：
 
 1. Fork 本仓库
 2. 创建你的特性分支
@@ -28,8 +28,8 @@ AusDoc 是 AusJava 服务器的官方文档站点，旨在为用户提供清晰�
 
 如有问题或建议，请通过以下方式联系我们：
 
-- GitHub Issues: [提交问题](https://github.com/yourusername/ausdoc/issues)
-- Email: [your-email]
+- GitHub Issues: [提交问题](https://github.com/ChineseLiyao/chineseliyao.github.io/issues)
+- Email: [liyao7195@outlook.com]
 
 ---
 
