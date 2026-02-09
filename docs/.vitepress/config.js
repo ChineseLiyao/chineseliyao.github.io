@@ -16,7 +16,6 @@ export default defineConfig({
       { text: '关于', link: '/about' }
     ],
 
-    // 自动生成的侧边栏
     sidebar: {
       '/guide/': guideSidebar
     },
@@ -30,7 +29,6 @@ export default defineConfig({
       copyright: 'Copyright © 2026-present AusJava'
     },
 
-    // 启用本地搜索
     search: {
       provider: 'local'
     }

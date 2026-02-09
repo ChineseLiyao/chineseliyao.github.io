@@ -18,13 +18,19 @@ const myCards = [
     title: 'Bedrock开服指南', 
     desc: '了解如何开一个基岩版服务器', 
     link: 'bedrock/',
-    type: 'page'
+    type: 'group'
   },
   { 
     title: 'Java版开服指南', 
     desc: '了解如何开一个Java版服务器', 
     link: 'java/',
-    type: 'page'
+    type: 'group'
+  },
+  { 
+    title: 'AusJava维护指南', 
+    desc: '了解如何维护AusJava服务器-AusJava管理组文档', 
+    link: 'aus/',
+    type: 'group'
   }
 ]
 </script>
