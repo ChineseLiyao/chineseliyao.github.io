@@ -12,6 +12,12 @@ import ApiCards from '../../.vitepress/theme/components/ApiCards.vue'
 
 const myCards = [
   { 
+    title: '游玩指南', 
+    desc: 'AusJava 服务器玩家游玩指南', 
+    link: '/guide/aus/player',
+    type: 'page'
+  },
+  { 
     title: '插件管理', 
     desc: '如何查找、选择和安装插件', 
     link: '/guide/aus/plugin',
